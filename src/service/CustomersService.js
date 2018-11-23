@@ -14,6 +14,12 @@ class CustomersService {
     remove(customer) {
         customers.splice(customers.indexOf(customer), 1);
     }
+
+    addCustomer(customer) {
+        customer.id = nextId;
+        customers.push(customer);
+        nextId++;
+    }
 }
 
 const customersService = new CustomersService();

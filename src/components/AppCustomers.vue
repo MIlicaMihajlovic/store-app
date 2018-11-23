@@ -17,7 +17,10 @@
                     <td><button @click="removeCustomer(customer)">Remove</button></td>
                 </tr>
             </tbody>
-        </table>
+        </table><br>
+
+        <router-link :to="{name: 'add-customer'}"><button>Add customer</button></router-link>
+
     </div>
    
 </template>
@@ -25,6 +28,7 @@
 <script>
 
 import customersService from '../service/CustomersService.js';
+
 
 export default {
     data() {
@@ -36,7 +40,9 @@ export default {
     methods: {
         removeCustomer(customer) {
             customersService.remove(customer);
-        }
+        },
+
+
     }
     
     
