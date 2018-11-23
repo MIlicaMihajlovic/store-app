@@ -4,15 +4,17 @@
 
         <table border=1>
             <thead>
-                <th>First Name</th>
-                <th>Last Name</th>
+                <th>Name</th>
                 <th>Email</th>
                 <th>Remove</th>
             </thead>
             <tbody>
                 <tr v-for="(customer, index) in customers" :key="index">
-                    <td>{{ customer.firstName}}</td>
-                    <td>{{ customer.lastName}}</td>
+                    <td>
+                        <router-link :to="{name: 'latest-purchases'}">
+                            {{ customer.firstName}} {{customer.lastName}}
+                        </router-link> 
+                    </td>
                     <td>{{ customer.email}}</td>
                     <td><button @click="removeCustomer(customer)">Remove</button></td>
                 </tr>
@@ -28,9 +30,15 @@
 <script>
 
 import customersService from '../service/CustomersService.js';
+import LatestPurchases from './LatestPurchases.vue';
 
 
 export default {
+
+    components: {
+        LatestPurchases
+    },
+
     data() {
         return {
             customers: customersService.list()
@@ -43,6 +51,15 @@ export default {
         },
 
 
+    },
+
+    computed: {
+        routeCustomer() {
+            let findedCustomer = this.customers.find(customer => customer.id == this.$route.params.id);
+            console.log(findedCustomer);
+            return findedCustomer;
+        }
+        
     }
     
     
